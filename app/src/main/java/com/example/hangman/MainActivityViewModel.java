@@ -12,10 +12,10 @@ public class MainActivityViewModel extends ViewModel
 {
     private String playerName;
     private int playerAge;
-    private int playerGender;
+    private int playerGender = 1;
     private int playerDifficulty;
     private int playerNumberOfMisses = 0;
-    private String currentWord = "DIZZINESS";
+    private String currentWord = "RHYTHM";
     private String currentWordGuessedLetters = initializeGuessedLetters();
     private int currentImage = R.drawable.ic_hangman_0;
     private ArrayList<Character> listOfLetters = new ArrayList<>();
@@ -107,7 +107,7 @@ public class MainActivityViewModel extends ViewModel
                 placesWhereTheLetterCanBeInserted.add(currentIndex);
         }
 
-        System.out.println("PLACES FOR " + inputLetter + ": " + placesWhereTheLetterCanBeInserted.toString());
+        //System.out.println("PLACES FOR " + inputLetter + ": " + placesWhereTheLetterCanBeInserted.toString());
     }
 
     public void setCurrentFragment(Fragment fragment)
@@ -207,7 +207,9 @@ public class MainActivityViewModel extends ViewModel
 
             if(currentIndex == 0 || currentIndex == wordLength - 1)
                 output = output.concat(String.valueOf(character));
-            else output = output.concat(" _ ");
+            else if(currentIndex == wordLength - 2)
+                output = output.concat(" _ ");
+            else output = output.concat(" _");
         }
 
         return output;
@@ -300,15 +302,25 @@ public class MainActivityViewModel extends ViewModel
         {
             ++currentIndex;
 
-            if(letter == '_')
-                output = output.concat(" _ ");
-            else if(currentIndex == 0 || currentIndex == currentWord.length() - 1)
+            if(currentIndex == 0 || currentIndex == currentWord.length() - 1) // if it's the first or the last character, adding the character
                 output = output.concat(String.valueOf(letter));
-            else output = output.concat(" " + letter + " ");
+            else if(currentIndex == currentWord.length() - 2) // if it's in the middle and the second last character, adding a space before and after it
+                output = output.concat(" " + letter + " ");
+            else output = output.concat(" " + letter); // if it's in the middle and not the second last character, adding a space before it
         }
 
         System.out.println("output: " + output);
 
         setCurrentWordGuessedLetters(output);
+    }
+
+    public boolean checkIfTheGameIsOver()
+    {
+        boolean isOver = false;
+
+        if(getPlayerNumberOfMisses() == 6 || removeSpacesFromGuessedWord().equals(currentWord) || getCurrentImage() == R.drawable.ic_hangman_6_man || getCurrentImage() == R.drawable.ic_hangman_6_woman)
+            isOver = true;
+
+        return isOver;
     }
 }

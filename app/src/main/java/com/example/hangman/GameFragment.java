@@ -65,63 +65,28 @@ public class GameFragment extends Fragment
         viewModel.setListOfLetters();
         viewModel.createLetterFrequency();
 
-        System.out.println("list of letters length: " + viewModel.getListOfLetters().size());
+        // le afiseaza doar dupa ce dam apply changes and restart activity
 
-        int[] frequency = viewModel.getCurrentWordLetterFrequency();
+//        viewModel.setPlacesWhereTheLetterCanBeInserted('Z');
+//        viewModel.insertLetter('Z');
+//
+//        viewModel.setPlacesWhereTheLetterCanBeInserted('I');
+//        viewModel.insertLetter('I');
+//
+//        viewModel.setPlacesWhereTheLetterCanBeInserted('E');
+//        viewModel.insertLetter('E');
+//
+//        viewModel.setPlacesWhereTheLetterCanBeInserted('N');
+//        viewModel.insertLetter('N');
+//
+//        viewModel.setPlacesWhereTheLetterCanBeInserted('X');
+//        viewModel.insertLetter('X');
+//
+//        viewModel.setPlacesWhereTheLetterCanBeInserted('S');
+//        viewModel.insertLetter('S');
 
-//        for(int c : frequency)
-//            Toast.makeText(requireActivity(), String.valueOf(c), Toast.LENGTH_SHORT).show();
-
-        //Toast.makeText(requireActivity(), viewModel.removeSpacesFromGuessedWord(), Toast.LENGTH_LONG).show();
-        viewModel.setPlacesWhereTheLetterCanBeInserted('Z');
-        viewModel.insertLetter('Z');
-
-        viewModel.setPlacesWhereTheLetterCanBeInserted('I');
-        viewModel.insertLetter('I');
-
-        viewModel.setPlacesWhereTheLetterCanBeInserted('E');
-        viewModel.insertLetter('E');
-
-        viewModel.setPlacesWhereTheLetterCanBeInserted('N');
-        viewModel.insertLetter('N');
-
-//        for(char c : viewModel.getListOfLetters())
-//            Toast.makeText(requireActivity(), String.valueOf(c), Toast.LENGTH_SHORT).show();
         createLetters();
         setOnLetterClickListener();
-
-
-//        gameImage.setOnClickListener(new View.OnClickListener()
-//        {
-//            @Override
-//            public void onClick(View v)
-//            {
-//                viewModel.incrementPlayerMisses();
-//                switch(viewModel.getPlayerNumberOfMisses())
-//                {
-//                    case 1:
-//                        setGameImage(R.drawable.ic_hangman_1);
-//                        break;
-//                    case 2:
-//                        setGameImage(R.drawable.ic_hangman_2_man);
-//                        break;
-//                    case 3:
-//                        setGameImage(R.drawable.ic_hangman_3_man);
-//                        break;
-//                    case 4:
-//                        setGameImage(R.drawable.ic_hangman_4_man);
-//                        break;
-//                    case 5:
-//                        setGameImage(R.drawable.ic_hangman_5_man);
-//                        break;
-//                    case 6:
-//                        setGameImage(R.drawable.ic_hangman_6_man);
-//                    default:
-//                        Toast.makeText(requireActivity(), "GAME OVER", Toast.LENGTH_SHORT).show();
-//                        break;
-//                }
-//            }
-//        });
 
         return v;
     }
@@ -178,15 +143,89 @@ public class GameFragment extends Fragment
                 @Override
                 public void onClick(View v)
                 {
-                    char character = letter.getText().charAt(0);
+                    char character = letter.getText().charAt(0); // saving the character displayed on the pressed button
+                    int imageToBeDisplayed;
 
-                    if(!viewModel.checkIfTheInputLetterIsContainedIntoTheCurrentWord(character))
+                    if(!viewModel.checkIfTheGameIsOver()) // if the game isn't over yet
                     {
-                        setImage(R.drawable.ic_hangman_1);
-                    }
-                    else setImage(R.drawable.ic_hangman_0);
+                        if(viewModel.checkIfTheInputLetterIsContainedIntoTheCurrentWord(character) && viewModel.checkIfTheInputLetterCanBeInserted(character)) // if the character is contained into the word and can be inserted
+                        {
+                            viewModel.setPlacesWhereTheLetterCanBeInserted(character);
+                            viewModel.insertLetter(character);
+                            displayRandomWord();
+                        }
+                        else // if the character isn't contained into the word or/and can't be inserted into it
+                        {
+                            viewModel.incrementPlayerMisses();
 
-                    //Toast.makeText(requireActivity(), String.valueOf(viewModel.checkIfTheInputLetterIsContainedIntoTheCurrentWord(character)), Toast.LENGTH_SHORT).show();
+                            switch(viewModel.getPlayerGender()) // checking player's gender
+                            {
+                                case 0: // if he's male
+                                {
+                                    switch(viewModel.getPlayerNumberOfMisses())
+                                    {
+                                        case 1:
+                                            imageToBeDisplayed = R.drawable.ic_hangman_1;
+                                            break;
+                                        case 2:
+                                            imageToBeDisplayed = R.drawable.ic_hangman_2_man;
+                                            break;
+                                        case 3:
+                                            imageToBeDisplayed = R.drawable.ic_hangman_3_man;
+                                            break;
+                                        case 4:
+                                            imageToBeDisplayed = R.drawable.ic_hangman_4_man;
+                                            break;
+                                        case 5:
+                                            imageToBeDisplayed = R.drawable.ic_hangman_5_man;
+                                            break;
+                                        default:
+                                            imageToBeDisplayed = R.drawable.ic_hangman_6_man;
+                                            break;
+                                    }
+
+                                    break;
+                                }
+                                case 1: // if she's female
+                                {
+                                    switch(viewModel.getPlayerNumberOfMisses())
+                                    {
+                                        case 1:
+                                            imageToBeDisplayed = R.drawable.ic_hangman_1;
+                                            break;
+                                        case 2:
+                                            imageToBeDisplayed = R.drawable.ic_hangman_2_woman;
+                                            break;
+                                        case 3:
+                                            imageToBeDisplayed = R.drawable.ic_hangman_3_woman;
+                                            break;
+                                        case 4:
+                                            imageToBeDisplayed = R.drawable.ic_hangman_4_woman;
+                                            break;
+                                        case 5:
+                                            imageToBeDisplayed = R.drawable.ic_hangman_5_woman;
+                                            break;
+                                        default:
+                                            imageToBeDisplayed = R.drawable.ic_hangman_6_woman;
+                                            break;
+                                    }
+
+                                    break;
+                                }
+                                default:
+                                    imageToBeDisplayed = R.drawable.ic_hangman_0;
+                                    break;
+                            }
+
+                            setImage(imageToBeDisplayed);
+
+                            Toast.makeText(requireActivity(), "Remaining attempts: " + (6 - viewModel.getPlayerNumberOfMisses()), Toast.LENGTH_LONG).show();
+                        }
+
+                        if(viewModel.checkIfTheGameIsOver())
+                            Toast.makeText(requireActivity(), "GAME OVER!", Toast.LENGTH_LONG).show();
+                    }
+                    else Toast.makeText(requireActivity(), "GAME OVER!", Toast.LENGTH_LONG).show();
                 }
             });
         }

@@ -1,11 +1,6 @@
 package com.example.hangman;
 
 import android.os.Bundle;
-
-import androidx.fragment.app.Fragment;
-import androidx.lifecycle.ViewModelProvider;
-
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,76 +10,36 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
+
 public class GameFragment extends Fragment
 {
     private MainActivityViewModel viewModel;
     private ImageView gameImage;
     private GridLayout lettersLayout;
-    private Button letterButton;
-    private GridLayout.LayoutParams buttonParams;
     private TextView gameWord;
-
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
-
-    private String mParam1;
-    private String mParam2;
 
     public GameFragment()
     {
         // Required empty public constructor
     }
 
-    public static GameFragment newInstance(String param1, String param2)
-    {
-        GameFragment fragment = new GameFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
-
     @Override
     public void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null)
-        {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
     {
         View v = inflater.inflate(R.layout.fragment_game, container, false);
+
         setVariables(v);
         displayRandomWord();
         viewModel.setListOfLetters();
         viewModel.createLetterFrequency();
-
-        // le afiseaza doar dupa ce dam apply changes and restart activity
-
-//        viewModel.setPlacesWhereTheLetterCanBeInserted('Z');
-//        viewModel.insertLetter('Z');
-//
-//        viewModel.setPlacesWhereTheLetterCanBeInserted('I');
-//        viewModel.insertLetter('I');
-//
-//        viewModel.setPlacesWhereTheLetterCanBeInserted('E');
-//        viewModel.insertLetter('E');
-//
-//        viewModel.setPlacesWhereTheLetterCanBeInserted('N');
-//        viewModel.insertLetter('N');
-//
-//        viewModel.setPlacesWhereTheLetterCanBeInserted('X');
-//        viewModel.insertLetter('X');
-//
-//        viewModel.setPlacesWhereTheLetterCanBeInserted('S');
-//        viewModel.insertLetter('S');
-
         createLetters();
         setOnLetterClickListener();
 
@@ -120,8 +75,8 @@ public class GameFragment extends Fragment
 
         for(char letter : englishAlphabetLetters)
         {
-            letterButton = new Button(requireActivity());
-            buttonParams = new GridLayout.LayoutParams(GridLayout.spec(GridLayout.UNDEFINED, GridLayout.FILL, 1f), GridLayout.spec(GridLayout.UNDEFINED, GridLayout.FILL, 1f));
+            Button letterButton = new Button(requireActivity());
+            GridLayout.LayoutParams buttonParams = new GridLayout.LayoutParams(GridLayout.spec(GridLayout.UNDEFINED, GridLayout.FILL, 1f), GridLayout.spec(GridLayout.UNDEFINED, GridLayout.FILL, 1f));
             buttonParams.height = 0;
             buttonParams.width = 0;
             letterButton.setText(String.valueOf(letter));
@@ -183,7 +138,6 @@ public class GameFragment extends Fragment
                                             imageToBeDisplayed = R.drawable.ic_hangman_6_man;
                                             break;
                                     }
-
                                     break;
                                 }
                                 case 1: // if she's female
@@ -209,7 +163,6 @@ public class GameFragment extends Fragment
                                             imageToBeDisplayed = R.drawable.ic_hangman_6_woman;
                                             break;
                                     }
-
                                     break;
                                 }
                                 default:
@@ -219,13 +172,26 @@ public class GameFragment extends Fragment
 
                             setImage(imageToBeDisplayed);
 
-                            Toast.makeText(requireActivity(), "Remaining attempts: " + (6 - viewModel.getPlayerNumberOfMisses()), Toast.LENGTH_LONG).show();
+                            Toast.makeText(requireActivity(), "Remaining attempts: " + (viewModel.getMaxNumberOfMisses() - viewModel.getPlayerNumberOfMisses()), Toast.LENGTH_SHORT).show();
                         }
 
                         if(viewModel.checkIfTheGameIsOver())
-                            Toast.makeText(requireActivity(), "GAME OVER!", Toast.LENGTH_LONG).show();
+                        {
+                            if(viewModel.getPlayerNumberOfMisses() != viewModel.getMaxNumberOfMisses())
+                            {
+                                viewModel.setGameWon(true);
+                                Toast.makeText(requireActivity(), "YOU WON!", Toast.LENGTH_SHORT).show();
+                            }
+                            else
+                            {
+                                viewModel.setGameWon(false);
+                                Toast.makeText(requireActivity(), "GAME OVER!", Toast.LENGTH_SHORT).show();
+                            }
+                        }
                     }
-                    else Toast.makeText(requireActivity(), "GAME OVER!", Toast.LENGTH_LONG).show();
+                    else if(viewModel.isGameWon())
+                        Toast.makeText(requireActivity(), "YOU WON!", Toast.LENGTH_SHORT).show();
+                    else Toast.makeText(requireActivity(), "GAME OVER!", Toast.LENGTH_SHORT).show();
                 }
             });
         }
@@ -233,14 +199,8 @@ public class GameFragment extends Fragment
 
     private void displayRandomWord()
     {
-        String generatedWord = viewModel.getCurrentWord();
         String guessedLetters = viewModel.getCurrentWordGuessedLetters();
 
         gameWord.setText(guessedLetters);
-    }
-
-    private void checkIfTheWordContainsTheLetter(char letter)
-    {
-
     }
 }

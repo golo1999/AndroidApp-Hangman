@@ -10,9 +10,10 @@ import java.util.Arrays;
 
 public class MainActivityViewModel extends ViewModel
 {
+    private static final int maxNumberOfMisses = 6;
     private String playerName;
     private int playerAge;
-    private int playerGender = 1;
+    private int playerGender;
     private int playerDifficulty;
     private int playerNumberOfMisses = 0;
     private String currentWord = "RHYTHM";
@@ -23,6 +24,7 @@ public class MainActivityViewModel extends ViewModel
     private int[] currentWordLetterFrequency;
     private Fragment currentFragment = new RegisterFragment();
     private char[] englishAlphabetLetters = {'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'};
+    private boolean gameWon = false;
 
     public void setPlayerName(String name)
     {
@@ -106,13 +108,21 @@ public class MainActivityViewModel extends ViewModel
             if(character == inputLetter && currentIndex > 0 && currentIndex < currentWord.length() - 1) // if the input character isn't the first of the last character of the chosen word
                 placesWhereTheLetterCanBeInserted.add(currentIndex);
         }
-
-        //System.out.println("PLACES FOR " + inputLetter + ": " + placesWhereTheLetterCanBeInserted.toString());
     }
 
     public void setCurrentFragment(Fragment fragment)
     {
         this.currentFragment = fragment;
+    }
+
+    public void setGameWon(boolean value)
+    {
+        gameWon = value;
+    }
+
+    public int getMaxNumberOfMisses()
+    {
+        return maxNumberOfMisses;
     }
 
     public String getPlayerName()
@@ -178,6 +188,11 @@ public class MainActivityViewModel extends ViewModel
     public char[] getEnglishAlphabetLetters()
     {
         return englishAlphabetLetters;
+    }
+
+    public boolean isGameWon()
+    {
+        return gameWon;
     }
 
     public boolean checkIfTheInputLetterIsContainedIntoTheCurrentWord(char inputLetter)
@@ -290,10 +305,7 @@ public class MainActivityViewModel extends ViewModel
 
             for(int place : placesWhereTheLetterCanBeInserted)
                 if(currentIndex == place)
-                {
                     aux = aux.substring(0, currentIndex) + inputLetter + aux.substring(currentIndex + 1);
-                    System.out.println("AUX (end): " + aux);
-                }
         }
 
         currentIndex = -1;
@@ -309,8 +321,6 @@ public class MainActivityViewModel extends ViewModel
             else output = output.concat(" " + letter); // if it's in the middle and not the second last character, adding a space before it
         }
 
-        System.out.println("output: " + output);
-
         setCurrentWordGuessedLetters(output);
     }
 
@@ -318,7 +328,7 @@ public class MainActivityViewModel extends ViewModel
     {
         boolean isOver = false;
 
-        if(getPlayerNumberOfMisses() == 6 || removeSpacesFromGuessedWord().equals(currentWord) || getCurrentImage() == R.drawable.ic_hangman_6_man || getCurrentImage() == R.drawable.ic_hangman_6_woman)
+        if(getPlayerNumberOfMisses() == getMaxNumberOfMisses() || removeSpacesFromGuessedWord().equals(currentWord) || getCurrentImage() == R.drawable.ic_hangman_6_man || getCurrentImage() == R.drawable.ic_hangman_6_woman)
             isOver = true;
 
         return isOver;

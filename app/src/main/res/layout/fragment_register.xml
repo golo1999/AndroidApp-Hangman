@@ -1,45 +1,52 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".RegisterFragment">
 
     <LinearLayout
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        app:layout_constraintWidth_percent=".9"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        android:orientation="vertical">
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintWidth_percent=".9">
 
         <EditText
+            android:id="@+id/registerNameInput"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Name"/>
+            android:hint="Name"
+            android:inputType="textPersonName" />
 
         <Spinner
+            android:id="@+id/registerGenderSpinner"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content"
+            android:entries="@array/gender_spinner_items" />
 
         <EditText
+            android:id="@+id/registerAgeInput"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Age"/>
+            android:hint="Age"
+            android:inputType="number" />
 
         <Spinner
+            android:id="@+id/registerDifficultySpinner"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:entries="@array/gender_spinner_items"/>
+            android:entries="@array/difficulty_spinner_items" />
 
         <Button
             android:id="@+id/registerButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Play"/>
+            android:text="Play" />
 
     </LinearLayout>
 

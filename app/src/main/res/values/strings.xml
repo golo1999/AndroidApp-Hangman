@@ -1,5 +1,9 @@
 <resources>
     <string name="app_name">Hangman</string>
+    <string name="congratulations"> Congratulations, </string>
+    <string name="bad_news"> Bad news, </string>
+    <string name="game_won"> You completed the game. </string>
+    <string name="game_lost"> The army hanged you. </string>
 
     <string-array name="gender_spinner_items">
         <item> Female </item>

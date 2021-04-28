@@ -1,11 +1,14 @@
-package com.example.hangman;
+package com.example.hangman.Repository;
 
 import android.app.Application;
 import android.os.AsyncTask;
 
 import androidx.lifecycle.LiveData;
 
-import java.util.ArrayList;
+import com.example.hangman.Room.Word;
+import com.example.hangman.Room.WordDao;
+import com.example.hangman.Room.WordsDatabase;
+
 import java.util.List;
 
 public class WordsRepository

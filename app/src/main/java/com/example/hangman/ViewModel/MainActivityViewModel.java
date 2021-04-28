@@ -1,37 +1,32 @@
-package com.example.hangman;
+package com.example.hangman.ViewModel;
 
 import android.app.Application;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.AndroidViewModel;
-import androidx.lifecycle.LifecycleOwner;
 import androidx.lifecycle.LiveData;
-import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModel;
+
+import com.example.hangman.R;
+import com.example.hangman.View.Fragment.RegisterFragment;
+import com.example.hangman.Repository.WordsRepository;
+import com.example.hangman.Room.Word;
+import com.example.hangman.View.Fragment.SplashScreenFragment;
 
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.concurrent.ThreadLocalRandom;
 
 public class MainActivityViewModel extends AndroidViewModel
 {
-    private String randomWORD = "random";
-
     private static final int maxNumberOfMisses = 6;
-    //private final String[] easyWords = { "CAT", "DOG", "HUMAN", "EYE", "HOUSE", "CAR", "DEER", "DOOR", "FLY", "JAW", "RAT", "RED", "GRAY", "FLU" };
-    //private final String[] mediumWords = { "JUICE", "IVY", "CIRCLE", "UNZIP", "GALAXY", "AZURE", "FAKING", "QUIZ", "QUARTZ", "JELLY", "COIN", "SPIDER", "WHITE", "YELLOW", "JOKER", "IVORY", "INJURY", "BLITZ" };
-    //private final String[] hardWords = { "RAZZMATAZZ", "RHUBARB", "ZIGZAGGING", "PNEUMONIA", "BEEKEEPER", "BUZZWORDS", "XYLOPHONE", "FLUFFINESS", "WELLSPRING", "MNEMONIC", "EMBEZZLE", "KNAPSACK", "WITCHCRAFT", "PEEKABOO", "JAWBREAKER", "VOYEURISM", "BUFFALO", "BOOKWORM", "BANDWAGON" };
 
     private WordsRepository repository;
     private LiveData<List<Word>> allEasyWords;
     private LiveData<List<Word>> allMediumWords;
     private LiveData<List<Word>> allHardWords;
-
-    private ArrayList<Word> listOfWords = new ArrayList<>();
 
     private String playerName;
     private int playerAge;
@@ -44,7 +39,7 @@ public class MainActivityViewModel extends AndroidViewModel
     private ArrayList<Character> listOfLetters = new ArrayList<>();
     private ArrayList<Integer> placesWhereTheLetterCanBeInserted = new ArrayList<>();
     private int[] currentWordLetterFrequency;
-    private Fragment currentFragment = new RegisterFragment();
+    private Fragment currentFragment = new SplashScreenFragment();
     private char[] englishAlphabetLetters = {'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'};
     private boolean gameWon = false;
 
@@ -55,18 +50,6 @@ public class MainActivityViewModel extends AndroidViewModel
         allEasyWords = repository.getAllEasyWords();
         allMediumWords = repository.getAllMediumWords();
         allHardWords = repository.getAllHardWords();
-
-//        allEasyWords.observe((LifecycleOwner) this, new Observer<List<Word>>()
-//        {
-//            @Override
-//            public void onChanged(List<Word> words)
-//            {
-//                System.out.println("EASY WORDS");
-//
-//                for(Word word : words)
-//                    System.out.println(word.getName());
-//            }
-//        });
     }
 
     public void insert(Word word)
@@ -82,11 +65,6 @@ public class MainActivityViewModel extends AndroidViewModel
     public void deleteAllWords()
     {
         repository.deleteAllWords();
-    }
-
-    public void setListOfWords(ArrayList<Word> listOfWords)
-    {
-        this.listOfWords = listOfWords;
     }
 
     public void setPlayerName(String name)
@@ -183,11 +161,6 @@ public class MainActivityViewModel extends AndroidViewModel
         gameWon = value;
     }
 
-    public ArrayList<Word> getListOfWords()
-    {
-        return listOfWords;
-    }
-
     public int getMaxNumberOfMisses()
     {
         return maxNumberOfMisses;
@@ -257,60 +230,6 @@ public class MainActivityViewModel extends AndroidViewModel
     {
         return allHardWords;
     }
-
-//    public String[] getEasyWords()
-//    {
-//        return easyWords;
-//    }
-//
-//    public String[] getMediumWords()
-//    {
-//        return mediumWords;
-//    }
-//
-//    public String[] getHardWords()
-//    {
-//        return hardWords;
-//    }
-
-//    public String generateRandomWord()
-//    {
-//        List<Word> wordsList;
-//
-//        System.out.println("WORDS LIST SIZE: " + listOfWords.size());
-//
-//        if(getPlayerDifficulty() == 0)
-//        {
-//            //return listOfWords.get(ThreadLocalRandom.current().nextInt(0, listOfWords.size())).getName();
-//
-//            getAllEasyWords().observeForever(new Observer<List<Word>>()
-//            {
-//                @Override
-//                public void onChanged(List<Word> words)
-//                {
-//                    randomWORD = words.get(6).getName();
-//                    System.out.println("6TH EASIEST WORD: " + randomWORD);
-//                }
-//            });
-//
-//            System.out.println("6TH EASIEST WORD: " + randomWORD);
-//
-//
-//
-//            wordsList = getAllEasyWords().getValue();
-//            if(wordsList != null) // e mereu null
-//                return wordsList.get(ThreadLocalRandom.current().nextInt(0, easyWords.length)).getName();
-//            else return "";
-//        }
-//        else if(getPlayerDifficulty() == 1)
-//        {
-//            return mediumWords[ThreadLocalRandom.current().nextInt(0, mediumWords.length)];
-//        }
-//        else
-//        {
-//            return hardWords[ThreadLocalRandom.current().nextInt(0, hardWords.length)];
-//        }
-//    }
 
     public int[] getCurrentWordLetterFrequency()
     {

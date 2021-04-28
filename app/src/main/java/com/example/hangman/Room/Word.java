@@ -1,4 +1,4 @@
-package com.example.hangman;
+package com.example.hangman.Room;
 
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;

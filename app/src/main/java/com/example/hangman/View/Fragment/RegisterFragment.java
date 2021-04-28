@@ -1,16 +1,28 @@
-package com.example.hangman;
+package com.example.hangman.View.Fragment;
 
+import android.graphics.Color;
+import android.graphics.PorterDuff;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
+
+import com.example.hangman.R;
+import com.example.hangman.View.Activity.MainActivity;
+import com.example.hangman.ViewModel.MainActivityViewModel;
 
 public class RegisterFragment extends Fragment
 {
@@ -38,6 +50,8 @@ public class RegisterFragment extends Fragment
         View v = inflater.inflate(R.layout.fragment_register, container, false);
 
         setVariables(v);
+        customizeSpinner(genderSpinner, getResources().getStringArray(R.array.gender_spinner_items));
+        customizeSpinner(difficultySpinner, getResources().getStringArray(R.array.difficulty_spinner_items));
         setOnClickListeners();
 
         return v;
@@ -74,7 +88,7 @@ public class RegisterFragment extends Fragment
 
                     ((MainActivity)requireActivity()).setFragment(new GameFragment());
                 }
-                else Toast.makeText(requireActivity(), "Please enter your details correctly", Toast.LENGTH_SHORT).show();
+                else Toast.makeText(requireActivity(), getResources().getString(R.string.register_error), Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -99,9 +113,46 @@ public class RegisterFragment extends Fragment
         String personAge = String.valueOf(ageInput.getText()).trim();
         boolean ok = false;
 
-        if(personName.length() > 1 && containsOnlyLettersAndSpaces(personName) && personAge.length() > 0 && Integer.parseInt(personAge) > 0) // if person's name has at least 2 characters and all of its characters are letters or spaces and age is greater than 0 years
+        if(personName.length() > 1 && containsOnlyLettersAndSpaces(personName) && personName.charAt(0) >= 65 && personName.charAt(0) <= 90 && personAge.length() > 0 && Integer.parseInt(personAge) > 0) // if person's name has at least 2 characters, it starts with a capital letter and all of its characters are letters or spaces and age is greater than 0 years
             ok = true;
 
         return  ok;
+    }
+
+    private void customizeSpinner(Spinner spinner, String[] items)
+    {
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(requireContext(), R.layout.custom_spinner_item, items)
+        {
+            @Override
+            public View getDropDownView(int position, @Nullable View convertView, @NonNull ViewGroup parent)
+            {
+                View v = super.getDropDownView(position, convertView, parent);
+
+                ((TextView)v).setTextColor(Color.parseColor("#5680E9"));
+                ((TextView)v).setTypeface(Typeface.DEFAULT_BOLD);
+                v.setBackgroundColor(Color.parseColor("#84CEEB"));
+
+                return v;
+            }
+        };
+
+        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener()
+        {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id)
+            {
+                ((TextView)parent.getChildAt(0)).setTextColor(Color.parseColor("#84CEEB"));
+                ((TextView)parent.getChildAt(0)).setTextSize(18);
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent)
+            {
+
+            }
+        });
+
+        spinner.getBackground().setColorFilter(Color.parseColor("#84CEEB"), PorterDuff.Mode.SRC_ATOP);
+        spinner.setAdapter(adapter);
     }
 }

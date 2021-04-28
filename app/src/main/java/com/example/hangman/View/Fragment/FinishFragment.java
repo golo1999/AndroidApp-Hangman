@@ -1,4 +1,4 @@
-package com.example.hangman;
+package com.example.hangman.View.Fragment;
 
 import android.os.Bundle;
 
@@ -11,13 +11,19 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.example.hangman.R;
+import com.example.hangman.View.Activity.MainActivity;
+import com.example.hangman.ViewModel.MainActivityViewModel;
+
 public class FinishFragment extends Fragment
 {
     private MainActivityViewModel viewModel;
     private TextView finishText;
     private TextView remainingGuesses;
     private TextView difficulty;
+    private TextView word;
     private Button playAgainButton;
+    private Button restartButton;
 
     public FinishFragment()
     {
@@ -48,7 +54,9 @@ public class FinishFragment extends Fragment
         finishText = v.findViewById(R.id.finishText);
         remainingGuesses = v.findViewById(R.id.finishDetailsGuesses);
         difficulty = v.findViewById(R.id.finishDetailsDifficulty);
+        word = v.findViewById(R.id.finishDetailsWord);
         playAgainButton = v.findViewById(R.id.finishPlayAgainButton);
+        restartButton = v.findViewById(R.id.finishRestartButton);
     }
 
     private void setOnClickListeners()
@@ -62,29 +70,42 @@ public class FinishFragment extends Fragment
                 viewModel.resetPlayerNumberOfMisses();
                 viewModel.setCurrentWordGuessedLetters(viewModel.initializeGuessedLetters());
                 viewModel.setGameWon(false);
-                //viewModel.setCurrentWord(viewModel.generateRandomWord());
                 ((MainActivity)requireActivity()).setFragment(new GameFragment());
+            }
+        });
+
+        restartButton.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+                viewModel.setCurrentImage(R.drawable.ic_hangman_0);
+                viewModel.resetPlayerNumberOfMisses();
+                viewModel.setGameWon(false);
+                ((MainActivity)requireActivity()).setFragment(new RegisterFragment());
             }
         });
     }
 
     private void setTexts()
     {
-        String message, remainingGuessesText, difficultyText;
+        String message, remainingGuessesText, difficultyText, wordText = getResources().getString(R.string.word) + ": " + viewModel.getCurrentWord();
 
         if(viewModel.isGameWon())
             message = getResources().getString(R.string.congratulations) + " " + viewModel.getPlayerName() + "! " + getResources().getString(R.string.game_won);
         else message = getResources().getString(R.string.bad_news) + " " + viewModel.getPlayerName() + "! " + getResources().getString(R.string.game_lost);
 
-        remainingGuessesText = "Remaining guesses: " + (viewModel.getMaxNumberOfMisses() - viewModel.getPlayerNumberOfMisses());
-        difficultyText = "Difficulty: ";
+        remainingGuessesText = getResources().getString(R.string.remaining_guesses) + ": " + (viewModel.getMaxNumberOfMisses() - viewModel.getPlayerNumberOfMisses());
+        difficultyText = getResources().getString(R.string.difficulty) + ": ";
 
         if(viewModel.getPlayerDifficulty() == 0)
-            difficultyText = difficultyText.concat("Easy");
+            difficultyText = difficultyText.concat(getResources().getString(R.string.easy));
         else if(viewModel.getPlayerDifficulty() == 1)
-            difficultyText = difficultyText.concat("Medium");
+            difficultyText = difficultyText.concat(getResources().getString(R.string.medium));
         else if(viewModel.getPlayerDifficulty() == 2)
-            difficultyText = difficultyText.concat("Hard");
+            difficultyText = difficultyText.concat(getResources().getString(R.string.hard));
+
+        word.setText(wordText);
 
         finishText.setText(message);
         remainingGuesses.setText(remainingGuessesText);

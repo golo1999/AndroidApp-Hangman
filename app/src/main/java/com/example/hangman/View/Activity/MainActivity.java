@@ -1,10 +1,13 @@
-package com.example.hangman;
+package com.example.hangman.View.Activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
 import android.os.Bundle;
+
+import com.example.hangman.R;
+import com.example.hangman.ViewModel.MainActivityViewModel;
 
 public class MainActivity extends AppCompatActivity
 {
@@ -29,11 +32,6 @@ public class MainActivity extends AppCompatActivity
     {
         getSupportFragmentManager().beginTransaction().replace(R.id.mainActivityFragment, fragment).commit();
         viewModel.setCurrentFragment(fragment);
-    }
-
-    public void setGameImage()
-    {
-
     }
 
     public void setVariables()

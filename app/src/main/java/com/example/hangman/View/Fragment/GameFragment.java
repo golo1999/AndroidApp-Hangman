@@ -1,6 +1,5 @@
-package com.example.hangman;
+package com.example.hangman.View.Fragment;
 
-import android.app.Application;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.view.LayoutInflater;
@@ -10,25 +9,27 @@ import android.widget.Button;
 import android.widget.GridLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
-import java.util.ArrayList;
+import com.example.hangman.R;
+import com.example.hangman.Room.Word;
+import com.example.hangman.View.Activity.MainActivity;
+import com.example.hangman.ViewModel.MainActivityViewModel;
+
+import java.util.Collections;
 import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
 
 public class GameFragment extends Fragment
 {
     private MainActivityViewModel viewModel;
-    //private WordsRepository repository = new WordsRepository((Application) getContext());
 
     private ImageView gameImage;
     private GridLayout lettersLayout;
     private TextView gameWord;
-    private ArrayList<Word> wordsList = new ArrayList<>();
 
     public GameFragment()
     {
@@ -47,41 +48,7 @@ public class GameFragment extends Fragment
         View v = inflater.inflate(R.layout.fragment_game, container, false);
 
         setVariables(v);
-        setWordsList();
-
         generateRandomWord();
-
-//        viewModel.getAllEasyWords().observe(getViewLifecycleOwner(), new Observer<List<Word>>()
-//        {
-//            @Override
-//            public void onChanged(List<Word> words)
-//            {
-//                int randomGeneratedNumber = ThreadLocalRandom.current().nextInt(0, words.size());
-//                String randomWord = words.get(randomGeneratedNumber).getName();
-//
-//                viewModel.setCurrentWord(randomWord);
-//
-//                viewModel.setCurrentWordGuessedLetters(viewModel.initializeGuessedLetters());
-//                displayRandomWord();
-//                viewModel.setListOfLetters();
-//                viewModel.createLetterFrequency();
-//                createLetters();
-//                setOnLetterClickListener();
-//
-//                //gameWord.setText(randomWord);
-//
-//                //Toast.makeText(requireActivity(), "EASY WORDS SIZE: " + words.size(), Toast.LENGTH_SHORT).show();
-//            }
-//        });
-
-        //viewModel.setCurrentWord(String.valueOf(gameWord.getText()));
-        //Toast.makeText(requireActivity(), "CURRENT WORD: " + viewModel.getCurrentWord(), Toast.LENGTH_SHORT).show();
-        //gameWord.setText("ZEU");
-
-        //generateRandomWord();
-        //viewModel.setCurrentWord(viewModel.generateRandomWord());
-        //Toast.makeText(requireActivity(), "WORD VALUE FROM VIEWMODEL OUTSIDE LISTENER: " + viewModel.getCurrentWord(), Toast.LENGTH_SHORT).show();
-
 
         return v;
     }
@@ -95,55 +62,7 @@ public class GameFragment extends Fragment
 
     private void setVariables(View v)
     {
-        //viewModel = new ViewModelProvider(this, ViewModelProvider.AndroidViewModelFactory.getInstance(requireActivity().getApplication())).get(MainActivityViewModel.class);
         viewModel = new ViewModelProvider(requireActivity()).get(MainActivityViewModel.class);
-        //viewModel.insert(new Word("ABCD", 1)); // merge
-        //viewModel.insert(new Word("ABCD2", 1)); // merge
-        //viewModel.delete(new Word("ABCD", 1));
-//        viewModel.insert(new Word("W1", 1));
-//        viewModel.insert(new Word("W2", 1));
-//        viewModel.insert(new Word("W3", 0));
-//        viewModel.insert(new Word("W4", 2));
-//        viewModel.insert(new Word("W5", 0));
-        //viewModel.deleteAllWords();
-
-        //Toast.makeText(requireActivity(), "EASY WORDS", Toast.LENGTH_SHORT).show();
-
-        viewModel.getAllEasyWords().observe(getViewLifecycleOwner(), new Observer<List<Word>>()
-        {
-            @Override
-            public void onChanged(List<Word> words)
-            {
-//                for(Word word : words)
-//                    Toast.makeText(requireActivity(), word.getName(), Toast.LENGTH_SHORT).show();
-            }
-        });
-
-        //Toast.makeText(requireActivity(), "MEDIUM WORDS", Toast.LENGTH_SHORT).show();
-
-        viewModel.getAllMediumWords().observe(getViewLifecycleOwner(), new Observer<List<Word>>()
-        {
-            @Override
-            public void onChanged(List<Word> words)
-            {
-//                for(Word word : words)
-//                    Toast.makeText(requireActivity(), word.getName(), Toast.LENGTH_SHORT).show();
-            }
-        });
-
-        //Toast.makeText(requireActivity(), "HARD WORDS", Toast.LENGTH_SHORT).show();
-
-        viewModel.getAllHardWords().observe(getViewLifecycleOwner(), new Observer<List<Word>>()
-        {
-            @Override
-            public void onChanged(List<Word> words)
-            {
-//                for(Word word : words)
-//                    Toast.makeText(requireActivity(), word.getName(), Toast.LENGTH_SHORT).show();
-            }
-        });
-
-
         gameImage = v.findViewById(R.id.gameImage);
         lettersLayout = v.findViewById(R.id.gameLetters);
         gameWord = v.findViewById(R.id.gameWord);
@@ -288,52 +207,6 @@ public class GameFragment extends Fragment
         }
     }
 
-    private void setWordsList() // merge
-    {
-        if(viewModel.getPlayerDifficulty() == 0)
-        {
-            viewModel.getAllEasyWords().observe(getViewLifecycleOwner(), new Observer<List<Word>>()
-            {
-                @Override
-                public void onChanged(List<Word> words)
-                {
-
-                    wordsList.addAll(words);
-                    viewModel.setListOfWords(wordsList);
-//                    ArrayList<Word> list123 = viewModel.getListOfWords();
-//
-//                    Toast.makeText(requireActivity(), "LIST123", Toast.LENGTH_SHORT).show();
-//                    for(Word w1 : list123)
-//                        Toast.makeText(requireActivity(), w1.getName(), Toast.LENGTH_SHORT).show();
-                }
-            });
-        }
-        else if(viewModel.getPlayerDifficulty() == 1)
-        {
-            viewModel.getAllMediumWords().observe(getViewLifecycleOwner(), new Observer<List<Word>>()
-            {
-                @Override
-                public void onChanged(List<Word> words)
-                {
-                    wordsList.addAll(words);
-                    viewModel.setListOfWords(wordsList);
-                }
-            });
-        }
-        else if(viewModel.getPlayerDifficulty() == 2)
-        {
-            viewModel.getAllHardWords().observe(getViewLifecycleOwner(), new Observer<List<Word>>()
-            {
-                @Override
-                public void onChanged(List<Word> words)
-                {
-                    wordsList.addAll(words);
-                    viewModel.setListOfWords(wordsList);
-                }
-            });
-        }
-    }
-
     private void displayRandomWord()
     {
         String guessedLetters = viewModel.getCurrentWordGuessedLetters();
@@ -350,11 +223,12 @@ public class GameFragment extends Fragment
                 @Override
                 public void onChanged(List<Word> words)
                 {
-                    int randomGeneratedNumber = ThreadLocalRandom.current().nextInt(0, words.size());
+                    Collections.shuffle(words);
+
+                    int randomGeneratedNumber = ThreadLocalRandom.current().nextInt(words.size());
                     String randomWord = words.get(randomGeneratedNumber).getName();
 
                     viewModel.setCurrentWord(randomWord);
-
                     viewModel.setCurrentWordGuessedLetters(viewModel.initializeGuessedLetters());
                     displayRandomWord();
                     viewModel.setListOfLetters();
@@ -371,11 +245,12 @@ public class GameFragment extends Fragment
                 @Override
                 public void onChanged(List<Word> words)
                 {
+                    Collections.shuffle(words);
+
                     int randomGeneratedNumber = ThreadLocalRandom.current().nextInt(0, words.size());
                     String randomWord = words.get(randomGeneratedNumber).getName();
 
                     viewModel.setCurrentWord(randomWord);
-
                     viewModel.setCurrentWordGuessedLetters(viewModel.initializeGuessedLetters());
                     displayRandomWord();
                     viewModel.setListOfLetters();
@@ -385,18 +260,19 @@ public class GameFragment extends Fragment
                 }
             });
         }
-        else if(viewModel.getPlayerDifficulty() == 2) // // if the selected difficulty is hard
+        else if(viewModel.getPlayerDifficulty() == 2) // if the selected difficulty is hard
         {
             viewModel.getAllHardWords().observe(getViewLifecycleOwner(), new Observer<List<Word>>()
             {
                 @Override
                 public void onChanged(List<Word> words)
                 {
+                    Collections.shuffle(words);
+
                     int randomGeneratedNumber = ThreadLocalRandom.current().nextInt(0, words.size());
                     String randomWord = words.get(randomGeneratedNumber).getName();
 
                     viewModel.setCurrentWord(randomWord);
-
                     viewModel.setCurrentWordGuessedLetters(viewModel.initializeGuessedLetters());
                     displayRandomWord();
                     viewModel.setListOfLetters();

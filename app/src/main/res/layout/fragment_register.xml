@@ -4,8 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".RegisterFragment"
-    android:background="#5680E9">
+    android:background="#5680E9"
+    tools:context=".View.Fragment.RegisterFragment">
 
     <LinearLayout
         android:layout_width="0dp"
@@ -24,9 +24,24 @@
             android:layout_marginBottom="10sp"
             android:background="@drawable/ic_input_rounder_border"
             android:backgroundTint="#84CEEB"
-            android:hint="Name"
+            android:hint="@string/name"
             android:importantForAutofill="no"
             android:inputType="textPersonName"
+            android:padding="10sp"
+            android:textColor="#84CEEB"
+            android:textColorHint="#84CEEB"
+            android:textSize="18sp" />
+
+        <EditText
+            android:id="@+id/registerAgeInput"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginVertical="10sp"
+            android:background="@drawable/ic_input_rounder_border"
+            android:backgroundTint="#84CEEB"
+            android:hint="@string/age"
+            android:importantForAutofill="no"
+            android:inputType="number"
             android:padding="10sp"
             android:textColor="#84CEEB"
             android:textColorHint="#84CEEB"
@@ -36,23 +51,7 @@
             android:id="@+id/registerGenderSpinner"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginVertical="10sp"
-            android:entries="@array/gender_spinner_items" />
-
-        <EditText
-            android:id="@+id/registerAgeInput"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginVertical="10sp"
-            android:background="@drawable/ic_input_rounder_border"
-            android:backgroundTint="#84CEEB"
-            android:hint="Age"
-            android:importantForAutofill="no"
-            android:inputType="number"
-            android:padding="10sp"
-            android:textColor="#84CEEB"
-            android:textColorHint="#84CEEB"
-            android:textSize="18sp" />
+            android:layout_marginVertical="10sp" />
 
         <Spinner
             android:id="@+id/registerDifficultySpinner"
@@ -66,11 +65,11 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10sp"
-            android:text="Play"
             android:background="@drawable/ic_button_rounded_corners"
+            android:text="@string/play"
             android:textAlignment="center"
             android:textColor="#5680E9"
-            android:textSize="18sp"/>
+            android:textSize="18sp" />
 
     </LinearLayout>
 

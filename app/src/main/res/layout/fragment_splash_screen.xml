@@ -4,8 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#5680E9"
-    tools:context=".View.Fragment.SplashScreenFragment">
+    android:background="@color/blueColor"
+    tools:context=".view.fragment.SplashScreenFragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="0sp"
@@ -22,6 +22,7 @@
             android:layout_width="0sp"
             android:layout_height="0sp"
             android:layout_marginBottom="10sp"
+            android:contentDescription="@string/app_name"
             android:src="@drawable/ic_splash_icon"
             app:layout_constraintBottom_toTopOf="@id/splashScreenText"
             app:layout_constraintDimensionRatio="1:1"
@@ -29,7 +30,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintWidth_percent=".5"
-            app:tint="#84CEEB" />
+            app:tint="@color/lightBlueColor" />
 
         <TextView
             android:id="@+id/splashScreenText"
@@ -38,7 +39,7 @@
             android:layout_marginTop="10sp"
             android:text="@string/app_name"
             android:textAlignment="center"
-            android:textColor="#84CEEB"
+            android:textColor="@color/lightBlueColor"
             android:textSize="40sp"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"

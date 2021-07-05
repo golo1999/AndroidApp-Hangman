@@ -1,93 +1,90 @@
 <resources>
-    <string name="age"> Age </string>
+    <string name="age">Age</string>
     <string name="app_name">Hangman</string>
-    <string name="bad_news"> Bad news, </string>
-    <string name="congratulations"> Congratulations, </string>
-    <string name="database_name"> words_database </string>
-    <string name="difficulty"> Difficulty </string>
-    <string name="easy"> Easy </string>
-    <string name="game_won"> You completed the game. </string>
-    <string name="game_lost"> The army hanged you. </string>
-    <string name="hard"> Hard </string>
-    <string name="medium"> Medium </string>
-    <string name="name"> Name </string>
-    <string name="play"> Play </string>
-    <string name="play_again"> Play again </string>
-    <string name="register_error"> Please enter your details correctly </string>
-    <string name="remaining_guesses"> Remaining guesses </string>
-    <string name="restart"> Restart </string>
-    <string name="word"> Word </string>
+    <string name="bad_news">Bad news,</string>
+    <string name="congratulations">Congratulations,</string>
+    <string name="database_name" translatable="false">words_database</string>
+    <string name="difficulty">Difficulty</string>
+    <string name="easy">Easy</string>
+    <string name="game_won">You completed the game.</string>
+    <string name="hard">Hard</string>
+    <string name="medium">Medium</string>
+    <string name="name">Name</string>
+    <string name="play">Play</string>
+    <string name="play_again">Play again</string>
+    <string name="register_error">Please enter your details correctly</string>
+    <string name="remaining_guesses">Remaining guesses</string>
+    <string name="restart">Restart</string>
+    <string name="word">Word</string>
 
     <string-array name="gender_spinner_items">
-        <item> Female </item>
-        <item> Male </item>
+        <item>Female</item>
+        <item>Male</item>
     </string-array>
 
     <string-array name="difficulty_spinner_items">
-        <item> Easy </item>
-        <item> Normal </item>
-        <item> Hard </item>
+        <item>Easy</item>
+        <item>Normal</item>
+        <item>Hard</item>
     </string-array>
 
     <string-array name="easy_words">
-        <item> CAT </item>
-        <item> DOG </item>
-        <item> HUMAN </item>
-        <item> EYE </item>
-        <item> HOUSE </item>
-        <item> CAR </item>
-        <item> DEER </item>
-        <item> DOOR </item>
-        <item> FLY </item>
-        <item> JAW </item>
-        <item> RAT </item>
-        <item> RED </item>
-        <item> GRAY </item>
-        <item> FLU </item>
+        <item>CAT</item>
+        <item>DOG</item>
+        <item>HUMAN</item>
+        <item>EYE</item>
+        <item>HOUSE</item>
+        <item>CAR</item>
+        <item>DEER</item>
+        <item>DOOR</item>
+        <item>FLY</item>
+        <item>JAW</item>
+        <item>RAT</item>
+        <item>RED</item>
+        <item>GRAY</item>
+        <item>FLU</item>
     </string-array>
 
     <string-array name="medium_words">
-        <item> JUICE </item>
-        <item> IVY </item>
-        <item> CIRCLE </item>
-        <item> UNZIP </item>
-        <item> GALAXY </item>
-        <item> AZURE </item>
-        <item> FAKING </item>
-        <item> QUIZ </item>
-        <item> QUARTZ </item>
-        <item> JELLY </item>
-        <item> COIN </item>
-        <item> SPIDER </item>
-        <item> WHITE </item>
-        <item> YELLOW </item>
-        <item> JOKER </item>
-        <item> IVORY </item>
-        <item> INJURY </item>
-        <item> BLITZ </item>
+        <item>JUICE</item>
+        <item>IVY</item>
+        <item>CIRCLE</item>
+        <item>UNZIP</item>
+        <item>GALAXY</item>
+        <item>AZURE</item>
+        <item>FAKING</item>
+        <item>QUIZ</item>
+        <item>QUARTZ</item>
+        <item>JELLY</item>
+        <item>COIN</item>
+        <item>SPIDER</item>
+        <item>WHITE</item>
+        <item>YELLOW</item>
+        <item>JOKER</item>
+        <item>IVORY</item>
+        <item>INJURY</item>
+        <item>BLITZ</item>
     </string-array>
 
     <string-array name="hard_words">
-        <item> RAZZMATAZZ </item>
-        <item> RHUBARB </item>
-        <item> ZIGZAGGING </item>
-        <item> PNEUMONIA </item>
-        <item> BEEKEEPER </item>
-        <item> BUZZWORDS </item>
-        <item> XYLOPHONE </item>
-        <item> FLUFFINESS </item>
-        <item> WELLSPRING </item>
-        <item> MNEMONIC </item>
-        <item> EMBEZZLE </item>
-        <item> KNAPSACK </item>
-        <item> WITCHCRAFT </item>
-        <item> PEEKABOO </item>
-        <item> JAWBREAKER </item>
-        <item> VOYEURISM </item>
-        <item> BUFFALO </item>
-        <item> BOOKWORM </item>
-        <item> BANDWAGON </item>
+        <item>RAZZMATAZZ</item>
+        <item>RHUBARB</item>
+        <item>ZIGZAGGING</item>
+        <item>PNEUMONIA</item>
+        <item>BEEKEEPER</item>
+        <item>BUZZWORDS</item>
+        <item>XYLOPHONE</item>
+        <item>FLUFFINESS</item>
+        <item>WELLSPRING</item>
+        <item>MNEMONIC</item>
+        <item>EMBEZZLE</item>
+        <item>KNAPSACK</item>
+        <item>WITCHCRAFT </item>
+        <item>PEEKABOO</item>
+        <item>JAWBREAKER</item>
+        <item>VOYEURISM</item>
+        <item>BUFFALO</item>
+        <item>BOOKWORM</item>
+        <item>BANDWAGON</item>
     </string-array>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

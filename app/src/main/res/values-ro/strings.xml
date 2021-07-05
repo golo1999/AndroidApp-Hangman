@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Spânzurătoarea</string>
+    <string name="age">Vârstă</string>
+    <string name="congratulations">Felicitări,</string>
+    <string name="difficulty">Dificultate</string>
+    <string name="name">Nume</string>
+    <string name="play_again">Joacă din nou</string>
+    <string name="play">Joacă</string>
+    <string name="word">Cuvânt</string>
+    <string name="easy">Ușor</string>
+    <string name="bad_news">Ghinion,</string>
+    <string name="hard">Dificil</string>
+    <string name="medium">Mediu</string>
+    <string name="register_error">Te rugăm să îți introduci datele în mod corect</string>
+    <string name="remaining_guesses">Șanse rămase</string>
+    <string name="restart">Repornire</string>
+    <string name="game_won">Ai câștigat.</string>
+
+    <string-array name="gender_spinner_items">
+        <item>Femeie</item>
+        <item>Bărbat</item>
+    </string-array>
+
+    <string-array name="difficulty_spinner_items">
+        <item>Ușor</item>
+        <item>Mediu</item>
+        <item>Dificil</item>
+    </string-array>
+
+    <string-array name="easy_words">
+        <item>PISICA</item>
+        <item>CAINE</item>
+        <item>OM</item>
+        <item>OCHI</item>
+        <item>CASA</item>
+        <item>MASINA</item>
+        <item>CERB</item>
+        <item>USA</item>
+        <item>MUSCA</item>
+        <item>MAXILAR</item>
+        <item>SOBOLAN</item>
+        <item>ROSU</item>
+        <item>GRI</item>
+        <item>GRIPA</item>
+    </string-array>
+
+    <string-array name="medium_words">
+        <item>SUC</item>
+        <item>IEDERA</item>
+        <item>CERB</item>
+        <item>DEZARHIVA</item>
+        <item>GALAXIE</item>
+        <item>SENIN</item>
+        <item>PREFACE</item>
+        <item>CHESTIONAR</item>
+        <item>CUART</item>
+        <item>JELEU</item>
+        <item>MONEDA</item>
+        <item>PAIANJEN</item>
+        <item>ALB</item>
+        <item>GALBEN</item>
+        <item>JOKER</item>
+        <item>FILDES</item>
+        <item>ACCIDENTARE</item>
+        <item>BOMBARDA</item>
+    </string-array>
+
+    <string-array name="hard_words">
+        <item>DISCOTECA</item>
+        <item>RUBARBA</item>
+        <item>ZIGZAG</item>
+        <item>PNEUMONIE</item>
+        <item>APICULTOR</item>
+        <item>BUZZWORDS</item>
+        <item>XILOFON</item>
+        <item>PUFOS</item>
+        <item>IZVOR</item>
+        <item>MNEMONIC</item>
+        <item>DELAPIDA</item>
+        <item>RUCSAC</item>
+        <item>VRAJITORIE </item>
+        <item>PEEKABOO</item>
+        <item>BATAUS</item>
+        <item>VOIAJ</item>
+        <item>BIVOL</item>
+        <item>TOCILAR</item>
+        <item>CARUCIOR</item>
+    </string-array>
+</resources>

@@ -4,8 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#C1C8E4"
-    tools:context=".View.Activity.MainActivity">
+    android:background="@color/lightPurpleColor"
+    tools:context=".view.activity.MainActivity">
 
     <FrameLayout
         android:id="@+id/mainActivityFragment"

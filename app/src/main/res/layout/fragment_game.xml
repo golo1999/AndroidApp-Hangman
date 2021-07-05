@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".View.Fragment.GameFragment">
+    tools:context=".view.fragment.GameFragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="0sp"
@@ -27,14 +27,14 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintWidth_percent=".9"
-            app:tint="#5680E9" />
+            app:tint="@color/blueColor" />
 
         <TextView
             android:id="@+id/gameWord"
             android:layout_width="0sp"
             android:layout_height="wrap_content"
             android:textAlignment="center"
-            android:textColor="#8860D0"
+            android:textColor="@color/purpleColor"
             android:textSize="40sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -58,6 +58,5 @@
         </GridLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>

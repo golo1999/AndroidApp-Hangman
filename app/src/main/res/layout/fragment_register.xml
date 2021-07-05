@@ -4,8 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#5680E9"
-    tools:context=".View.Fragment.RegisterFragment">
+    android:background="@color/blueColor"
+    tools:context=".view.fragment.RegisterFragment">
 
     <LinearLayout
         android:layout_width="0dp"
@@ -23,13 +23,13 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="10sp"
             android:background="@drawable/ic_input_rounder_border"
-            android:backgroundTint="#84CEEB"
+            android:backgroundTint="@color/lightBlueColor"
             android:hint="@string/name"
             android:importantForAutofill="no"
             android:inputType="textPersonName"
             android:padding="10sp"
-            android:textColor="#84CEEB"
-            android:textColorHint="#84CEEB"
+            android:textColor="@color/lightBlueColor"
+            android:textColorHint="@color/lightBlueColor"
             android:textSize="18sp" />
 
         <EditText
@@ -38,13 +38,13 @@
             android:layout_height="wrap_content"
             android:layout_marginVertical="10sp"
             android:background="@drawable/ic_input_rounder_border"
-            android:backgroundTint="#84CEEB"
+            android:backgroundTint="@color/lightBlueColor"
             android:hint="@string/age"
             android:importantForAutofill="no"
             android:inputType="number"
             android:padding="10sp"
-            android:textColor="#84CEEB"
-            android:textColorHint="#84CEEB"
+            android:textColor="@color/lightBlueColor"
+            android:textColorHint="@color/lightBlueColor"
             android:textSize="18sp" />
 
         <Spinner
@@ -68,7 +68,7 @@
             android:background="@drawable/ic_button_rounded_corners"
             android:text="@string/play"
             android:textAlignment="center"
-            android:textColor="#5680E9"
+            android:textColor="@color/blueColor"
             android:textSize="18sp" />
 
     </LinearLayout>
